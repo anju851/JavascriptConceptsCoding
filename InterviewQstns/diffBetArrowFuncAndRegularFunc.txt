@@ -1,0 +1,99 @@
+In JavaScript, normal functions and arrow functions are two different ways to define functions. Here are the main differences between them:
+
+1. Syntax
+
+Normal Function:
+
+function add(a, b) {
+  return a + b;
+}
+
+Arrow Function:
+
+const add = (a, b) => {
+  return a + b;
+};
+
+Or, with a concise syntax:
+
+const add = (a, b) => a + b;
+
+
+2. this context
+
+Normal Function:
+The this context is bound to the object that calls the function.
+
+const obj = {
+  name: 'John',
+  sayHello: function() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+};
+obj.sayHello(); // Output: "Hello, my name is John"
+
+Arrow Function:
+The this context is inherited from the surrounding scope.
+
+const obj = {
+  name: 'John',
+  sayHello: () => {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+};
+obj.sayHello(); // Output: "Hello, my name is undefined" (because `this` is not bound to `obj`)
+
+
+3. arguments object
+
+Normal Function:
+The arguments object is available inside the function.
+
+function sum(a, b) {
+  console.log(arguments); // Output: [1, 2]
+  return a + b;
+}
+sum(1, 2);
+
+Arrow Function:
+The arguments object is not available inside the function.
+
+const sum = (a, b) => {
+  console.log(arguments); // Output: ReferenceError: arguments is not defined
+  return a + b;
+};
+sum(1, 2);
+
+
+4. Return value
+
+Normal Function:
+If you don't explicitly return a value, the function will return undefined.
+
+function add(a, b) {
+  a + b;
+}
+console.log(add(1, 2)); // Output: undefined
+
+Arrow Function:
+If you don't explicitly return a value, the function will return undefined. However, if you use the concise syntax, the return value will be implicitly returned.
+
+const add = (a, b) => a + b;
+console.log(add(1, 2)); // Output: 3
+
+
+5. Hoisting
+
+Normal Function:
+Function declarations are hoisted to the top of their scope.
+
+console.log(add(1, 2)); // Output: 3
+function add(a, b) {
+  return a + b;
+}
+
+Arrow Function:
+Function expressions are not hoisted.
+
+console.log(add(1, 2)); // Output: ReferenceError: add is not defined
+const add = (a, b) => a + b;
